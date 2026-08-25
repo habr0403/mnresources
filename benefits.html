@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A simple Minnesota benefits navigator for treatment clients and support staff." />
+  <title>Benefits | MN Resource & Recovery Hub</title>
+  <link rel="stylesheet" href="portal-nav.css">
+  <style>
+    :root {
+      --navy:#17324d; --blue:#2463a7; --sky:#eaf4ff; --teal:#147d78; --green:#2f7d4a;
+      --gold:#f2b84b; --red:#b53a3a; --ink:#22313f; --muted:#607080; --line:#dbe4ec;
+      --paper:#ffffff; --bg:#f5f8fb; --shadow:0 10px 28px rgba(20,50,80,.10);
+      --radius:18px;
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+    a{color:var(--blue)} button,input,select{font:inherit}
+    .skip{position:absolute;left:-9999px;top:10px;background:#fff;padding:10px;z-index:99}.skip:focus{left:10px}
+    header{background:linear-gradient(135deg,var(--navy),#24577d);color:#fff;padding:26px 18px 60px}
+    .topbar,.hero,.wrap{max-width:1160px;margin:auto}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:15px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:1.05rem}.logo{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:#fff;color:var(--navy);font-size:22px}
+    .top-actions{display:flex;gap:8px;flex-wrap:wrap}.top-actions button{border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.1);color:#fff;padding:9px 12px;border-radius:10px;cursor:pointer}
+    .hero{display:grid;grid-template-columns:1.25fr .75fr;gap:32px;align-items:center;padding-top:45px}.hero h1{font-size:clamp(2.1rem,5vw,4rem);line-height:1.02;margin:0 0 18px}.hero p{font-size:1.12rem;max-width:760px;color:#e9f3fc}.hero-card{background:#fff;color:var(--ink);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+    .hero-card h2{margin-top:0;font-size:1.15rem}.hero-card ol{padding-left:21px;margin-bottom:0}.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.22);padding:7px 11px;border-radius:999px;font-size:.88rem}
+    main{margin-top:-28px}.wrap{padding:0 18px 50px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin-bottom:20px}
+    .notice{border-left:6px solid var(--gold);background:#fff9ea}.notice strong{color:#6a4b00}.emergency{border-left-color:var(--red);background:#fff4f4}
+    .section-title{display:flex;justify-content:space-between;gap:12px;align-items:end;margin-bottom:16px}.section-title h2{margin:0;font-size:1.55rem}.section-title p{margin:0;color:var(--muted)}
+    .search-row{display:grid;grid-template-columns:1fr auto;gap:10px}.search-row input{width:100%;padding:14px;border:1px solid #b8c7d4;border-radius:12px}.btn{border:0;border-radius:11px;padding:12px 16px;font-weight:750;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}.btn-primary{background:var(--blue);color:#fff}.btn-secondary{background:#edf3f8;color:var(--navy)}.btn-green{background:var(--green);color:#fff}.btn-outline{background:#fff;border:1px solid #aec0cf;color:var(--navy)}
+    .quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.quick{padding:16px;border:1px solid var(--line);border-radius:15px;background:#fff;cursor:pointer;text-align:left}.quick:hover,.quick:focus{border-color:var(--blue);box-shadow:0 6px 18px rgba(36,99,167,.12)}.quick span{font-size:1.55rem}.quick b{display:block;margin-top:5px}.quick small{color:var(--muted)}
+    .matcher-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.question{border:1px solid var(--line);border-radius:14px;padding:14px}.question label{font-weight:700;display:block;margin-bottom:7px}.question select{width:100%;padding:10px;border:1px solid #bdcad5;border-radius:9px;background:#fff}
+    .result-box{margin-top:16px;padding:15px;background:var(--sky);border-radius:13px;display:none}.result-box.show{display:block}
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 18px}.filters{display:flex;gap:8px;flex-wrap:wrap}.filter{background:#edf3f8;border:0;border-radius:999px;padding:9px 13px;cursor:pointer}.filter.active{background:var(--navy);color:#fff}
+    .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}.card{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}.card-head{display:flex;justify-content:space-between;gap:12px;padding:17px 17px 10px}.card h3{margin:0}.category{font-size:.77rem;text-transform:uppercase;letter-spacing:.06em;color:var(--teal);font-weight:800}.card-body{padding:0 17px 17px}.card p{color:#526371}.card ul{padding-left:20px}.card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.save{background:transparent;border:1px solid #c4d0da;border-radius:9px;padding:8px 10px;cursor:pointer}.save.saved{background:#e7f5eb;border-color:#85b995;color:#155f31}
+    .doc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.doc{border:1px solid var(--line);border-radius:13px;padding:13px;display:flex;gap:10px}.doc input{margin-top:5px;transform:scale(1.2)}
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.step{background:#f7fafc;border:1px solid var(--line);padding:14px;border-radius:14px}.step-num{width:31px;height:31px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:#fff;font-weight:800}
+    .accordion{border-top:1px solid var(--line)}details{border-bottom:1px solid var(--line);padding:12px 0}summary{cursor:pointer;font-weight:760}.small{font-size:.9rem;color:var(--muted)}
+    footer{background:#11283c;color:#e8f1f8;padding:35px 18px}.footer-inner{max-width:1160px;margin:auto}.footer-inner a{color:#fff}
+    .toast{position:fixed;right:18px;bottom:18px;background:#17324d;color:#fff;padding:12px 15px;border-radius:10px;opacity:0;transform:translateY(12px);transition:.2s;pointer-events:none}.toast.show{opacity:1;transform:translateY(0)}
+    @media(max-width:850px){.hero{grid-template-columns:1fr}.quick-grid{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}.doc-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:560px){header{padding-bottom:42px}.topbar{align-items:flex-start}.brand-text{display:none}.hero{padding-top:32px}.panel{padding:18px}.search-row{grid-template-columns:1fr}.quick-grid,.matcher-grid,.steps,.doc-grid{grid-template-columns:1fr}.section-title{display:block}.section-title p{margin-top:5px}.top-actions button{font-size:.82rem;padding:8px}.card-actions .btn{width:100%}}
+    @media print{header,.search-row,.quick-grid,.matcher-grid,.filters,.toolbar,.card-actions,footer,.toast{display:none!important}main{margin:0}.panel,.card{box-shadow:none;break-inside:avoid}.cards{grid-template-columns:1fr 1fr}body{background:#fff}}
+  </style>
+</head>
+<body>
+<div class="portal-bar" role="navigation" aria-label="Minnesota Resource & Recovery Hub">
+  <div class="portal-bar-inner">
+    <a class="portal-home" href="index.html"><span class="portal-mark">MN</span><span><strong>Resource & Recovery Hub</strong><small>One Minnesota support website</small></span></a>
+    <nav class="portal-links" aria-label="Hub sections">
+      <a href="resources.html">Housing & Treatment</a>
+      <a href="benefits.html" aria-current="page">Benefits</a>
+      <a href="meetings.html">Recovery Meetings</a>
+    </nav>
+  </div>
+</div>
+
+<a class="skip" href="#main">Skip to main content</a>
+<header>
+  <div class="topbar">
+    <div class="brand"><div class="logo">✓</div><span class="brand-text">Minnesota Benefits Navigator</span></div>
+    <div class="top-actions"><button onclick="setTextSize()">A+ Text</button><button onclick="togglePlain()">Plain View</button><button onclick="window.print()">Print</button></div>
+  </div>
+  <div class="hero">
+    <div>
+      <h1>Find help. Get organized. Apply with confidence.</h1>
+      <p>This guide helps Minnesota clients identify benefits, gather documents, use official application websites, and keep track of next steps.</p>
+      <div class="badges"><span class="badge">Mobile friendly</span><span class="badge">Plain language</span><span class="badge">No account required</span><span class="badge">Progress saved on this device</span></div>
+    </div>
+    <aside class="hero-card" aria-label="How to use this website">
+      <h2>Start here</h2>
+      <ol><li>Use the benefit matcher.</li><li>Open programs that fit your needs.</li><li>Check off documents you have.</li><li>Apply only through official websites.</li></ol>
+    </aside>
+  </div>
+</header>
+<main id="main">
+<div class="wrap">
+  <section class="panel notice emergency">
+    <strong>Need help today?</strong> If you do not have food, shelter, medicine, safety, or transportation right now, call 2-1-1 or contact your county or Tribal Nation human services office. This website does not decide eligibility and is not an emergency service.
+  </section>
+
+  <section class="panel">
+    <div class="section-title"><div><h2>What do you need help with?</h2><p>Search by need, program name, or keyword.</p></div></div>
+    <div class="search-row"><input id="search" type="search" placeholder="Try: food, rent, disability, child care, health insurance..." aria-label="Search benefit programs"><button class="btn btn-primary" onclick="runSearch()">Search benefits</button></div>
+  </section>
+
+  <section class="panel">
+    <div class="section-title"><div><h2>Choose a need</h2><p>Jump to a benefit category.</p></div></div>
+    <div class="quick-grid">
+      <button class="quick" onclick="filterCards('food')"><span>🥕</span><b>Food</b><small>Groceries, WIC, meals</small></button>
+      <button class="quick" onclick="filterCards('cash')"><span>💵</span><b>Cash</b><small>Basic needs and emergencies</small></button>
+      <button class="quick" onclick="filterCards('health')"><span>🩺</span><b>Health care</b><small>Insurance and treatment</small></button>
+      <button class="quick" onclick="filterCards('housing')"><span>🏠</span><b>Housing</b><small>Rent, shelter, utilities</small></button>
+      <button class="quick" onclick="filterCards('family')"><span>👨‍👩‍👧</span><b>Family</b><small>Child care and parenting</small></button>
+      <button class="quick" onclick="filterCards('disability')"><span>♿</span><b>Disability</b><small>SSI, SSDI and supports</small></button>
+      <button class="quick" onclick="filterCards('work')"><span>🧰</span><b>Work</b><small>Unemployment and leave</small></button>
+      <button class="quick" onclick="filterCards('other')"><span>🧭</span><b>More help</b><small>Veterans, phones, legal</small></button>
+    </div>
+  </section>
+
+  <section class="panel" id="matcher">
+    <div class="section-title"><div><h2>Benefit matcher</h2><p>This is a starting point, not an eligibility decision.</p></div></div>
+    <div class="matcher-grid">
+      <div class="question"><label for="income">Is household income limited?</label><select id="income"><option value="">Choose</option><option value="yes">Yes</option><option value="no">No / unsure</option></select></div>
+      <div class="question"><label for="children">Are children or pregnancy involved?</label><select id="children"><option value="">Choose</option><option value="yes">Yes</option><option value="no">No</option></select></div>
+      <div class="question"><label for="work">Unable to work or recently lost work?</label><select id="work"><option value="">Choose</option><option value="disabled">Unable due to health/disability</option><option value="lost">Lost job or hours</option><option value="no">No</option></select></div>
+      <div class="question"><label for="housing">Housing or utility crisis?</label><select id="housing"><option value="">Choose</option><option value="yes">Yes</option><option value="no">No</option></select></div>
+    </div>
+    <div class="toolbar"><button class="btn btn-green" onclick="matchBenefits()">Show possible programs</button><button class="btn btn-secondary" onclick="resetMatcher()">Reset</button></div>
+    <div id="matchResult" class="result-box" aria-live="polite"></div>
+  </section>
+
+  <section class="panel" id="programs">
+    <div class="section-title"><div><h2>Benefit programs</h2><p>Use the official application buttons. Requirements can change.</p></div><span id="resultCount" class="small"></span></div>
+    <div class="filters">
+      <button class="filter active" onclick="filterCards('all',this)">All</button><button class="filter" onclick="filterCards('food',this)">Food</button><button class="filter" onclick="filterCards('cash',this)">Cash</button><button class="filter" onclick="filterCards('health',this)">Health</button><button class="filter" onclick="filterCards('housing',this)">Housing</button><button class="filter" onclick="filterCards('family',this)">Family</button><button class="filter" onclick="filterCards('disability',this)">Disability</button><button class="filter" onclick="filterCards('work',this)">Work</button><button class="filter" onclick="filterCards('other',this)">Other</button>
+    </div>
+    <div class="toolbar"><button class="btn btn-outline" onclick="showSaved()">Show my saved programs</button><button class="btn btn-outline" onclick="clearSaved()">Clear saved</button></div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section class="panel" id="documents">
+    <div class="section-title"><div><h2>Document checklist</h2><p>You may not need every item. Submit what the agency requests.</p></div><button class="btn btn-outline" onclick="clearChecklist()">Clear checks</button></div>
+    <div class="doc-grid" id="docGrid"></div>
+  </section>
+
+  <section class="panel">
+    <div class="section-title"><div><h2>Application roadmap</h2><p>Four steps that reduce delays.</p></div></div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><h3>Apply</h3><p>Use MNbenefits for food, cash, emergency help, child care and Housing Support. Health coverage may use a separate application.</p></div>
+      <div class="step"><div class="step-num">2</div><h3>Complete the interview</h3><p>Watch for calls, mail, email or online notices. Save the worker's name and phone number.</p></div>
+      <div class="step"><div class="step-num">3</div><h3>Send proof</h3><p>Upload clear photos or copies. Label each item with your name and case number when instructed.</p></div>
+      <div class="step"><div class="step-num">4</div><h3>Track and respond</h3><p>Write down deadlines. Report changes and complete renewals on time.</p></div>
+    </div>
+  </section>
+
+  <section class="panel notice">
+    <strong>Protect yourself from scams:</strong> Government agencies do not charge a fee just to submit a standard public-benefit application. Do not share passwords, EBT PINs, verification codes, or banking credentials with strangers. Check that a website ends in <strong>.gov</strong> or belongs to a verified agency.
+  </section>
+
+  <section class="panel">
+    <div class="section-title"><div><h2>Frequently asked questions</h2></div></div>
+    <div class="accordion">
+      <details><summary>Can I apply while in residential or outpatient treatment?</summary><p>Often, yes. Eligibility depends on the specific program, household arrangement, income, and other rules. Ask your county worker how treatment placement affects household and shelter information.</p></details>
+      <details><summary>What if I do not have every document?</summary><p>Do not automatically delay an application. Apply and follow the agency's instructions. Explain what is missing and ask what alternative proof is accepted.</p></details>
+      <details><summary>Can staff help me apply?</summary><p>Staff may help you understand questions, gather documents, make copies, locate official resources, and organize follow-up. You should review answers before submission and protect private login information.</p></details>
+      <details><summary>What if I am denied?</summary><p>Read the notice carefully. It should explain the reason, missing information, and appeal or reconsideration rights. Pay close attention to deadlines.</p></details>
+      <details><summary>Will applying affect immigration status?</summary><p>Immigration and public-benefit rules are complex and program-specific. Use a qualified immigration legal-services provider before making assumptions.</p></details>
+    </div>
+  </section>
+</div>
+</main>
+<footer><div class="footer-inner"><strong>Minnesota Benefits Navigator</strong><p>Educational tool for clients and helping professionals. It does not provide legal advice, guarantee eligibility, or replace instructions from Minnesota agencies, counties, Tribal Nations, or federal programs.</p><p class="small">Last reviewed: August 6, 2026. Verify current rules on the official application page before submitting.</p></div></footer>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const programs=[
+ {id:'snap',cat:'food',name:'SNAP Food Benefits',desc:'Monthly food benefits loaded to an EBT card for eligible households.',good:['Households with limited income','People working low-wage jobs','Adults and families'],need:['Identity','Income and expenses','Household information'],url:'https://mnbenefits.mn.gov/',apply:'Apply through MNbenefits'},
+ {id:'wic',cat:'food family',name:'WIC',desc:'Nutrition support, healthy foods, breastfeeding support and referrals for pregnant/postpartum people, infants and young children.',good:['Pregnant people','Postpartum parents','Children under age 5'],need:['Identity and address','Income information','Pregnancy or child information'],url:'https://www.health.state.mn.us/people/wic/',apply:'Find Minnesota WIC'},
+ {id:'meals',cat:'food other',name:'Food Shelves & Community Meals',desc:'Immediate food support through local food shelves, meal sites and community organizations.',good:['Anyone needing food now','People waiting for SNAP'],need:['Requirements vary by provider'],url:'https://www.211unitedway.org/',apply:'Search through 211'},
+ {id:'mfip',cat:'cash family',name:'MFIP Family Cash Assistance',desc:'Cash and employment support for eligible families with children.',good:['Parents or caregivers with children','Families with limited income'],need:['Household members','Income/assets','Child and caregiver information'],url:'https://mnbenefits.mn.gov/',apply:'Apply through MNbenefits'},
+ {id:'ga',cat:'cash disability',name:'General Assistance',desc:'Basic cash assistance for some adults without children who meet income and program-category rules.',good:['Adults with very limited income','People who may have barriers to work'],need:['Identity','Income/assets','Proof related to qualifying category'],url:'https://mnbenefits.mn.gov/',apply:'Apply through MNbenefits'},
+ {id:'emergency',cat:'cash housing',name:'Emergency Assistance',desc:'Possible short-term help for an urgent household crisis, depending on local rules and available funding.',good:['Eviction or utility crisis','Urgent family need'],need:['Crisis notice or bill','Income','Household information'],url:'https://mnbenefits.mn.gov/',apply:'Apply through MNbenefits'},
+ {id:'ma',cat:'health',name:'Medical Assistance (MA)',desc:'Minnesota Medicaid coverage for eligible people, including many adults, children, pregnant people, seniors and people with disabilities.',good:['People without affordable insurance','People with low income','People needing ongoing care'],need:['Household and tax information','Income','Citizenship/immigration documentation when requested'],url:'https://mn.gov/dhs/health-care/apply/',apply:'Open health care application'},
+ {id:'mcare',cat:'health',name:'MinnesotaCare',desc:'Low-cost health coverage for eligible Minnesotans who do not qualify for Medical Assistance and meet program rules.',good:['Working adults','Families needing affordable coverage'],need:['Household and tax information','Income','Current insurance information'],url:'https://mn.gov/dhs/health-care/apply/',apply:'Open health care application'},
+ {id:'housing-support',cat:'housing disability',name:'Housing Support',desc:'Helps pay room-and-board costs in certain approved settings for eligible adults with disabilities or specific needs.',good:['People needing supportive housing','People with qualifying disability or program status'],need:['Income/assets','Housing setting details','Disability or qualifying-status proof'],url:'https://mnbenefits.mn.gov/',apply:'Apply through MNbenefits'},
+ {id:'energy',cat:'housing',name:'Energy Assistance Program',desc:'Seasonal help with home heating and energy costs for eligible renters and homeowners.',good:['Households with high utility burden','People facing shutoff'],need:['Utility bills','Income proof','Household information'],url:'https://mn.gov/commerce/energy/consumer-assistance/energy-assistance-program/',apply:'Find local energy assistance'},
+ {id:'ccap',cat:'family',name:'Child Care Assistance Program',desc:'Helps eligible families afford child care while parents work, seek work, attend school, or participate in approved activities.',good:['Parents and eligible caregivers','Families with low income'],need:['Child information','Work/school schedule','Provider and income information'],url:'https://mnbenefits.mn.gov/',apply:'Apply through MNbenefits'},
+ {id:'ssi',cat:'disability cash',name:'Supplemental Security Income (SSI)',desc:'Federal monthly payments for people who are aged, blind, or disabled and have limited income and resources.',good:['Adults or children with qualifying disability','Adults 65 or older with limited resources'],need:['Medical records','Work history','Income/assets','Identity'],url:'https://www.ssa.gov/apply/ssi',apply:'Apply with Social Security'},
+ {id:'ssdi',cat:'disability cash',name:'Social Security Disability Insurance (SSDI)',desc:'Federal disability benefits for people with a qualifying disability and sufficient work history.',good:['People unable to sustain work because of a serious condition'],need:['Detailed medical records','Work history','Provider contacts'],url:'https://www.ssa.gov/disability',apply:'Apply with Social Security'},
+ {id:'unemployment',cat:'work cash',name:'Minnesota Unemployment Insurance',desc:'Temporary income for eligible workers who lost work or hours through no fault of their own and meet ongoing requirements.',good:['Recently unemployed workers','Workers with reduced hours'],need:['Employment history','Dates and reason work ended','Identity and banking information'],url:'https://www.uimn.org/applicants/',apply:'Apply for unemployment'},
+ {id:'paidleave',cat:'work health',name:'Minnesota Paid Leave',desc:'Paid family and medical leave may help eligible workers take time for their own serious health condition, caregiving, bonding, safety leave or qualifying military needs.',good:['Eligible Minnesota workers needing covered leave'],need:['Employment and wage information','Medical or family documentation as required'],url:'https://mn.gov/deed/paidleave/',apply:'Visit Minnesota Paid Leave'},
+ {id:'veterans',cat:'other health housing',name:'Veterans Benefits',desc:'Federal, state and county benefits may include health care, disability compensation, education, housing and emergency assistance.',good:['Veterans','Service members','Eligible family members'],need:['DD-214 or service records','Identity','Medical or dependent records as applicable'],url:'https://mn.gov/mdva/resources/countyveteranservicerofficers/',apply:'Find a County Veterans Service Officer'},
+ {id:'lifeline',cat:'other',name:'Lifeline Phone or Internet Discount',desc:'Federal discount for qualifying low-income consumers on phone, internet, or bundled service.',good:['People receiving certain qualifying benefits','Households meeting income rules'],need:['Identity','Benefit or income proof'],url:'https://www.lifelinesupport.org/',apply:'Check Lifeline eligibility'},
+ {id:'tax',cat:'cash family other',name:'Tax Credits & Free Tax Preparation',desc:'Refundable credits and free tax preparation may increase a refund for eligible workers and families.',good:['Low- to moderate-income workers','Families with children'],need:['W-2/1099 forms','ID and Social Security documents','Prior return if available'],url:'https://www.revenue.state.mn.us/free-tax-preparation-sites',apply:'Find free tax preparation'},
+ {id:'benefitfinder',cat:'other',name:'Federal Benefit Finder',desc:'A federal questionnaire that suggests programs based on your situation and life events.',good:['Anyone unsure where to start'],need:['Basic household and situation information'],url:'https://www.usa.gov/benefit-finder',apply:'Use the federal Benefit Finder'}
+];
+const docs=['Photo ID or other identity proof','Social Security numbers or immigration documents when requested','Proof of Minnesota address or current living situation','Recent pay stubs or employer statement','Benefit award letters or other income proof','Bank statements or asset information when requested','Rent statement, lease, shelter letter or housing costs','Utility bills and shutoff notices','Child care provider and schedule information','Medical provider names and contact information','Medical records or disability paperwork','Court, child support or custody documents when relevant','Health insurance cards or termination notice','Case number, confirmation page and worker contact notes','A safe email address and phone number'];
+let saved=JSON.parse(localStorage.getItem('savedPrograms')||'[]');
+function renderCards(list=programs){const c=document.getElementById('cards');c.innerHTML=list.map(p=>`<article class="card" data-cat="${p.cat}" data-text="${(p.name+' '+p.desc+' '+p.cat).toLowerCase()}"><div class="card-head"><div><div class="category">${p.cat.split(' ')[0]}</div><h3>${p.name}</h3></div><button class="save ${saved.includes(p.id)?'saved':''}" onclick="toggleSave('${p.id}',this)">${saved.includes(p.id)?'✓ Saved':'☆ Save'}</button></div><div class="card-body"><p>${p.desc}</p><strong>May be useful for:</strong><ul>${p.good.map(x=>`<li>${x}</li>`).join('')}</ul><strong>Common information to gather:</strong><ul>${p.need.map(x=>`<li>${x}</li>`).join('')}</ul><div class="card-actions"><a class="btn btn-primary" href="${p.url}" target="_blank" rel="noopener">${p.apply}</a></div></div></article>`).join('');document.getElementById('resultCount').textContent=`${list.length} program${list.length===1?'':'s'} shown`;}
+function renderDocs(){const checks=JSON.parse(localStorage.getItem('docChecks')||'{}');document.getElementById('docGrid').innerHTML=docs.map((d,i)=>`<label class="doc"><input type="checkbox" ${checks[i]?'checked':''} onchange="saveCheck(${i},this.checked)"><span>${d}</span></label>`).join('')}
+function saveCheck(i,v){const x=JSON.parse(localStorage.getItem('docChecks')||'{}');x[i]=v;localStorage.setItem('docChecks',JSON.stringify(x))}
+function clearChecklist(){localStorage.removeItem('docChecks');renderDocs();toast('Checklist cleared')}
+function filterCards(cat,btn){document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');const list=cat==='all'?programs:programs.filter(p=>p.cat.includes(cat));renderCards(list);document.getElementById('programs').scrollIntoView({behavior:'smooth'})}
+function runSearch(){const q=document.getElementById('search').value.trim().toLowerCase();const list=!q?programs:programs.filter(p=>(p.name+' '+p.desc+' '+p.cat+' '+p.good.join(' ')+' '+p.need.join(' ')).toLowerCase().includes(q));renderCards(list);document.getElementById('programs').scrollIntoView({behavior:'smooth'});if(!list.length)toast('No exact match. Try a broader word.')}
+document.getElementById('search').addEventListener('keydown',e=>{if(e.key==='Enter')runSearch()});
+function toggleSave(id,b){saved=saved.includes(id)?saved.filter(x=>x!==id):[...saved,id];localStorage.setItem('savedPrograms',JSON.stringify(saved));b.classList.toggle('saved');b.textContent=saved.includes(id)?'✓ Saved':'☆ Save';toast(saved.includes(id)?'Program saved':'Program removed')}
+function showSaved(){renderCards(programs.filter(p=>saved.includes(p.id)));document.getElementById('programs').scrollIntoView({behavior:'smooth'})}
+function clearSaved(){saved=[];localStorage.removeItem('savedPrograms');renderCards();toast('Saved programs cleared')}
+function matchBenefits(){let ids=[];const income=document.getElementById('income').value, children=document.getElementById('children').value, work=document.getElementById('work').value, housing=document.getElementById('housing').value;if(income==='yes')ids.push('snap','ga','ma','mcare','lifeline','tax');if(children==='yes')ids.push('wic','mfip','ccap','ma','tax');if(work==='disabled')ids.push('ssi','ssdi','ga','ma','housing-support');if(work==='lost')ids.push('unemployment','snap','ma','mcare');if(housing==='yes')ids.push('emergency','energy','housing-support','meals');ids=[...new Set(ids)];const box=document.getElementById('matchResult');box.classList.add('show');if(!ids.length){box.innerHTML='<strong>Start with MNbenefits and the Federal Benefit Finder.</strong><p>They can help identify options even when you are unsure which category fits.</p>';return}const names=programs.filter(p=>ids.includes(p.id)).map(p=>p.name);box.innerHTML=`<strong>Programs worth checking:</strong><p>${names.join(' • ')}</p><button class="btn btn-primary" onclick='renderCards(programs.filter(p=>${JSON.stringify(ids)}.includes(p.id)));document.getElementById("programs").scrollIntoView({behavior:"smooth"})'>Show these programs</button>`}
+function resetMatcher(){['income','children','work','housing'].forEach(id=>document.getElementById(id).value='');document.getElementById('matchResult').classList.remove('show')}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+function setTextSize(){document.body.style.fontSize=document.body.style.fontSize==='19px'?'':'19px';toast(document.body.style.fontSize?'Larger text on':'Standard text restored')}
+function togglePlain(){document.body.classList.toggle('plain');document.querySelectorAll('.panel,.card').forEach(x=>x.style.boxShadow=document.body.classList.contains('plain')?'none':'');toast(document.body.classList.contains('plain')?'Plain view on':'Standard view restored')}
+const portalQuery=(new URLSearchParams(window.location.search).get('q')||'').trim();
+if(portalQuery){document.getElementById('search').value=portalQuery;const q=portalQuery.toLowerCase();renderCards(programs.filter(p=>(p.name+' '+p.desc+' '+p.cat+' '+p.good.join(' ')+' '+p.need.join(' ')).toLowerCase().includes(q)))}else{renderCards()}
+renderDocs();
+</script>
+</body>
+</html>

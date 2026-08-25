@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Search Minnesota housing, treatment, IOP, sober housing, reentry, and coordinated access resources.">
+  <meta name="theme-color" content="#0c6670">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Housing & Treatment | MN Resource & Recovery Hub</title>
+  <link rel="stylesheet" href="portal-nav.css">
+  <link rel="stylesheet" href="resource-styles.css">
+</head>
+<body>
+<div class="portal-bar" role="navigation" aria-label="Minnesota Resource & Recovery Hub">
+  <div class="portal-bar-inner">
+    <a class="portal-home" href="index.html"><span class="portal-mark">MN</span><span><strong>Resource & Recovery Hub</strong><small>One Minnesota support website</small></span></a>
+    <nav class="portal-links" aria-label="Hub sections">
+      <a href="resources.html" aria-current="page">Housing & Treatment</a>
+      <a href="benefits.html">Benefits</a>
+      <a href="meetings.html">Recovery Meetings</a>
+    </nav>
+  </div>
+</div>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Minnesota Resource Navigator home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 52 52" role="img"><path d="M26 4 46 15v22L26 48 6 37V15L26 4Z" fill="currentColor" opacity=".16"/><path d="M16 31.5V22l10-7 10 7v9.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 35v-9h10v9M12 36h28" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+        </span>
+        <span><strong>MN Resource Navigator</strong><small>Housing • Treatment • Recovery</small></span>
+      </a>
+      <button class="menu-button" id="menuButton" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+      <nav class="primary-nav" id="primaryNav" aria-label="Primary navigation">
+        <a href="#directory">Find resources</a>
+        <a href="#guided-start">Where to start</a>
+        <a href="#tools">Guides & tools</a>
+        <a href="#tracker">My tracker <span class="nav-count" id="trackerCount">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="top">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Minnesota resource directory</span>
+          <h1>Find the right housing or treatment path without digging through dozens of lists.</h1>
+          <p>Search affordable housing, residential treatment, IOP, recovery residences, reentry programs, and county access points—all in one place.</p>
+          <form class="hero-search" id="heroSearchForm" role="search">
+            <label class="sr-only" for="heroSearch">Search resources</label>
+            <span aria-hidden="true">⌕</span>
+            <input id="heroSearch" type="search" autocomplete="off" placeholder="Search by program, city, county, need, or service…">
+            <button type="submit">Search</button>
+          </form>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#directory">Browse all resources</a>
+            <a class="button button-ghost" href="#guided-start">Help me choose a path</a>
+          </div>
+        </div>
+        <aside class="hero-panel" aria-label="Directory summary">
+          <div class="hero-panel-top">
+            <span class="live-dot" aria-hidden="true"></span>
+            <span>Workbook directory converted to a web app</span>
+          </div>
+          <div class="stat-grid" id="heroStats"></div>
+          <p class="verification-note"><strong>Always verify first.</strong> Openings, eligibility, insurance, costs, and referral rules can change.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section-tight" aria-labelledby="category-heading">
+      <div class="container">
+        <div class="section-heading inline-heading">
+          <div>
+            <span class="eyebrow">Choose a category</span>
+            <h2 id="category-heading">What are you looking for?</h2>
+          </div>
+          <p>Start broad, then narrow results using location, population, and service filters.</p>
+        </div>
+        <div class="category-grid" id="categoryGrid"></div>
+      </div>
+    </section>
+
+    <section class="section directory-section" id="directory" aria-labelledby="directory-heading">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Searchable directory</span>
+          <h2 id="directory-heading">Find programs and housing resources</h2>
+          <p>Use keywords such as “women with children,” “MAT,” “eviction,” “veteran,” “telehealth,” or a city/county name.</p>
+        </div>
+
+        <div class="directory-toolbar">
+          <div class="search-field">
+            <label for="directorySearch">Search the directory</label>
+            <div class="input-with-icon">
+              <span aria-hidden="true">⌕</span>
+              <input id="directorySearch" type="search" autocomplete="off" placeholder="Program, city, county, eligibility, service…">
+              <button class="clear-search" id="clearSearch" type="button" aria-label="Clear search">×</button>
+            </div>
+          </div>
+          <div class="toolbar-actions">
+            <button class="button button-light" id="filterToggle" type="button" aria-expanded="false" aria-controls="filterPanel">Filters <span id="activeFilterCount">0</span></button>
+            <button class="button button-light" id="favoritesToggle" type="button" aria-pressed="false">♡ Favorites</button>
+            <button class="button button-light" id="exportButton" type="button">Export results</button>
+            <button class="button button-light" id="printButton" type="button">Print</button>
+          </div>
+        </div>
+
+        <div class="filter-panel" id="filterPanel">
+          <div class="filter-grid">
+            <div class="filter-group">
+              <label for="typeFilter">Resource type</label>
+              <select id="typeFilter"><option value="all">All resource types</option></select>
+            </div>
+            <div class="filter-group">
+              <label for="locationFilter">City / county / area</label>
+              <select id="locationFilter"><option value="all">All locations</option></select>
+            </div>
+            <div class="filter-group">
+              <label for="populationFilter">Population</label>
+              <select id="populationFilter"><option value="all">All populations</option></select>
+            </div>
+            <div class="filter-group">
+              <label for="featureFilter">Need or feature</label>
+              <select id="featureFilter">
+                <option value="all">All needs and features</option>
+                <option value="eviction">Eviction / rental barrier</option>
+                <option value="criminal">Criminal background / reentry</option>
+                <option value="low income">Low income / affordable</option>
+                <option value="pregnant">Pregnant / parenting</option>
+                <option value="children">Children allowed</option>
+                <option value="co-occurring">Co-occurring mental health</option>
+                <option value="mat">MAT support</option>
+                <option value="telehealth">Telehealth</option>
+                <option value="lgbtq">LGBTQ+ services</option>
+                <option value="veteran">Veteran</option>
+                <option value="youth">Youth / young adult</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="sortFilter">Sort by</label>
+              <select id="sortFilter">
+                <option value="relevance">Best match</option>
+                <option value="name">Program name</option>
+                <option value="location">Location</option>
+                <option value="priority">Priority</option>
+              </select>
+            </div>
+          </div>
+          <button class="text-button" id="resetFilters" type="button">Reset all filters</button>
+        </div>
+
+        <div class="results-header">
+          <div><strong id="resultCount">0</strong> <span id="resultLabel">resources</span></div>
+          <div class="view-toggle" role="group" aria-label="Results view">
+            <button id="cardViewButton" type="button" class="active" aria-pressed="true">Cards</button>
+            <button id="listViewButton" type="button" aria-pressed="false">Compact</button>
+          </div>
+        </div>
+
+        <div class="active-filters" id="activeFilters" aria-live="polite"></div>
+        <div class="resource-grid" id="resourceGrid"></div>
+        <div class="empty-state" id="emptyState" hidden>
+          <div class="empty-icon" aria-hidden="true">⌕</div>
+          <h3>No exact matches found</h3>
+          <p>Try removing a filter, using a nearby city or county, or searching a broader term.</p>
+          <button class="button button-primary" id="emptyReset" type="button">Clear filters</button>
+        </div>
+        <div class="load-more-wrap"><button class="button button-light" id="loadMore" type="button">Show more resources</button></div>
+      </div>
+    </section>
+
+    <section class="section path-section" id="guided-start" aria-labelledby="guided-heading">
+      <div class="container">
+        <div class="section-heading centered">
+          <span class="eyebrow">Guided start</span>
+          <h2 id="guided-heading">Not sure where to begin?</h2>
+          <p>Pick the situation that is closest to what is happening now.</p>
+        </div>
+        <div class="path-grid" id="pathGrid"></div>
+      </div>
+    </section>
+
+    <section class="section tools-section" id="tools" aria-labelledby="tools-heading">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Action tools</span>
+          <h2 id="tools-heading">Turn the search into a step-by-step plan</h2>
+          <p>These guides and checklists came from the workbook and save progress in this browser.</p>
+        </div>
+        <div class="tool-tabs" role="tablist" aria-label="Resource tools">
+          <button role="tab" aria-selected="true" aria-controls="tool-checklists" id="tab-checklists">Checklists</button>
+          <button role="tab" aria-selected="false" aria-controls="tool-guides" id="tab-guides">Guides</button>
+          <button role="tab" aria-selected="false" aria-controls="tool-scripts" id="tab-scripts">Call scripts</button>
+          <button role="tab" aria-selected="false" aria-controls="tool-profile" id="tab-profile">Housing profile</button>
+          <button role="tab" aria-selected="false" aria-controls="tool-definitions" id="tab-definitions">Definitions</button>
+        </div>
+
+        <div class="tool-panel" id="tool-checklists" role="tabpanel" aria-labelledby="tab-checklists"></div>
+        <div class="tool-panel" id="tool-guides" role="tabpanel" aria-labelledby="tab-guides" hidden></div>
+        <div class="tool-panel" id="tool-scripts" role="tabpanel" aria-labelledby="tab-scripts" hidden></div>
+        <div class="tool-panel" id="tool-profile" role="tabpanel" aria-labelledby="tab-profile" hidden></div>
+        <div class="tool-panel" id="tool-definitions" role="tabpanel" aria-labelledby="tab-definitions" hidden></div>
+      </div>
+    </section>
+
+    <section class="section tracker-section" id="tracker" aria-labelledby="tracker-heading">
+      <div class="container">
+        <div class="section-heading tracker-heading-row">
+          <div>
+            <span class="eyebrow">Private browser tracker</span>
+            <h2 id="tracker-heading">My saved resources and follow-ups</h2>
+            <p>Favorites, status, and notes stay on this device. Nothing is uploaded.</p>
+          </div>
+          <div class="tracker-actions">
+            <button class="button button-light" id="exportTracker" type="button">Export tracker</button>
+            <button class="button button-danger-ghost" id="clearTracker" type="button">Clear tracker</button>
+          </div>
+        </div>
+        <div class="tracker-summary" id="trackerSummary"></div>
+        <div class="tracker-table-wrap">
+          <table class="tracker-table">
+            <thead><tr><th>Resource</th><th>Type</th><th>Status</th><th>Next follow-up</th><th>Notes</th><th></th></tr></thead>
+            <tbody id="trackerBody"></tbody>
+          </table>
+          <div class="empty-tracker" id="emptyTracker">
+            <h3>No saved resources yet</h3>
+            <p>Select the heart on a resource card or choose a tracking status to add it here.</p>
+            <a class="button button-primary" href="#directory">Find resources</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>MN Housing & Recovery Resource Navigator</strong>
+        <p>Built from the expanded workbook directory. Use this as a navigation tool—not as a guarantee of placement or legal, medical, or financial advice.</p>
+      </div>
+      <div>
+        <strong>Before referring</strong>
+        <p>Confirm openings, licensed level of care, eligibility, insurance/funding, cost, medication policy, accessibility, and referral requirements.</p>
+      </div>
+      <div>
+        <strong>Data date</strong>
+        <p id="footerDataDate"></p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="compare-tray" id="compareTray" hidden>
+    <div><strong><span id="compareCount">0</span> selected</strong><span>Compare up to 4 resources</span></div>
+    <div><button class="button button-light" id="clearCompare" type="button">Clear</button><button class="button button-primary" id="openCompare" type="button">Compare</button></div>
+  </div>
+
+  <dialog class="resource-dialog" id="resourceDialog">
+    <div class="dialog-shell">
+      <button class="dialog-close" type="button" aria-label="Close">×</button>
+      <div id="resourceDialogContent"></div>
+    </div>
+  </dialog>
+
+  <dialog class="compare-dialog" id="compareDialog">
+    <div class="dialog-shell wide">
+      <button class="dialog-close" type="button" aria-label="Close">×</button>
+      <div id="compareDialogContent"></div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="resource-data.js"></script>
+  <script src="resource-app.js"></script>
+</body>
+</html>

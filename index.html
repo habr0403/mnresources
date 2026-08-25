@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="One Minnesota website for housing, treatment, public benefits, recovery housing, reentry resources, and recovery meeting pathways.">
+  <meta name="theme-color" content="#0b5661">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>MN Resource & Recovery Hub</title>
+  <link rel="stylesheet" href="portal-nav.css">
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  
+<div class="portal-bar" role="navigation" aria-label="Minnesota Resource & Recovery Hub">
+  <div class="portal-bar-inner">
+    <a class="portal-home" href="index.html" aria-current="page"><span class="portal-mark">MN</span><span><strong>Resource & Recovery Hub</strong><small>One Minnesota support website</small></span></a>
+    <nav class="portal-links" aria-label="Hub sections">
+      <a href="resources.html">Housing & Treatment</a>
+      <a href="benefits.html">Benefits</a>
+      <a href="meetings.html">Recovery Meetings</a>
+    </nav>
+  </div>
+</div>
+
+  <main id="main">
+    <section class="hub-hero">
+      <div class="hub-glow hub-glow-one"></div><div class="hub-glow hub-glow-two"></div>
+      <div class="hub-container hero-layout">
+        <div>
+          <span class="hub-eyebrow">Minnesota support navigator</span>
+          <h1>Housing, treatment, benefits, and recovery support—together in one place.</h1>
+          <p class="hero-lead">Use one starting point to search Minnesota housing and treatment programs, explore public benefits, or find a recovery meeting approach that fits.</p>
+          <form class="global-search" id="globalSearchForm" role="search">
+            <label class="sr-only" for="globalSearch">Search the entire hub</label>
+            <span aria-hidden="true">⌕</span>
+            <input id="globalSearch" type="search" autocomplete="off" placeholder="Try: women with children, IOP, SNAP, AA, eviction, MAT…">
+            <button type="submit">Search all</button>
+          </form>
+          <div class="quick-links"><button data-q="women with children">Women + children</button><button data-q="IOP MAT">IOP + MAT</button><button data-q="eviction housing">Eviction barriers</button><button data-q="food benefits">Food benefits</button><button data-q="opioids">Opioid recovery</button></div>
+        </div>
+        <aside class="hero-summary">
+          <span class="summary-kicker">What is inside</span>
+          <div class="summary-stat"><strong>309</strong><span>housing, treatment, IOP, recovery housing, reentry & access records</span></div>
+          <div class="summary-stat"><strong>19</strong><span>public-benefit and support programs</span></div>
+          <div class="summary-stat"><strong>37</strong><span>recovery fellowships and meeting pathways</span></div>
+          <p>Saved items and checklists stay on the device in your browser.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="hub-section hub-container" aria-labelledby="start-heading">
+      <div class="section-heading"><span class="hub-eyebrow">Choose a starting point</span><h2 id="start-heading">What do you need help with?</h2><p>You can move between all three tools without leaving this website.</p></div>
+      <div class="portal-cards">
+        <a class="portal-card housing-card" href="resources.html">
+          <span class="card-icon">⌂</span><span class="card-kicker">309 records</span><h3>Housing & Treatment</h3>
+          <p>Affordable housing, residential SUD treatment, IOP/outpatient, sober housing, reentry, and county/statewide access points.</p>
+          <div class="mini-stats"><span>70 housing</span><span>65 treatment</span><span>75 IOP</span></div><strong>Open navigator →</strong>
+        </a>
+        <a class="portal-card benefits-card" href="benefits.html">
+          <span class="card-icon">✓</span><span class="card-kicker">19 programs</span><h3>Minnesota Benefits</h3>
+          <p>Food, cash, medical coverage, housing help, disability, child care, work supports, and a benefit matcher with a document checklist.</p>
+          <div class="mini-stats"><span>Benefit matcher</span><span>Saved programs</span><span>Document checklist</span></div><strong>Open benefits →</strong>
+        </a>
+        <a class="portal-card meetings-card" href="meetings.html">
+          <span class="card-icon">∞</span><span class="card-kicker">37 options</span><h3>Recovery Meetings</h3>
+          <p>Substance and behavioral recovery options across 12-Step, secular, mindfulness, faith-based, Indigenous, medication-friendly, and all-pathways support.</p>
+          <div class="mini-stats"><span>In-person + online</span><span>Family support</span><span>Official finders</span></div><strong>Find meetings →</strong>
+        </a>
+      </div>
+    </section>
+
+    <section class="hub-section search-results-section" id="searchArea" hidden>
+      <div class="hub-container">
+        <div class="results-head"><div><span class="hub-eyebrow">Whole-site search</span><h2>Matches across the hub</h2></div><button id="clearGlobal" type="button">Clear search</button></div>
+        <p id="globalCount" class="global-count" aria-live="polite"></p>
+        <div id="globalResults" class="global-results"></div>
+      </div>
+    </section>
+
+    <section class="hub-section alt-section">
+      <div class="hub-container">
+        <div class="section-heading"><span class="hub-eyebrow">Fast routes</span><h2>Common reasons people use the hub</h2></div>
+        <div class="route-grid">
+          <a href="resources.html?q=women%20children%20pregnant%20parenting"><strong>Women with children</strong><span>Treatment, recovery housing, and family-aware resources →</span></a>
+          <a href="resources.html?q=eviction%20barrier"><strong>Eviction or rental barrier</strong><span>Barrier-aware and second-chance housing leads →</span></a>
+          <a href="resources.html?type=iop"><strong>IOP / outpatient care</strong><span>Search schedules, telehealth, MAT, insurance, and housing →</span></a>
+          <a href="benefits.html?q=food"><strong>Food or cash help</strong><span>SNAP, WIC, cash assistance, and immediate food resources →</span></a>
+          <a href="benefits.html?q=disability"><strong>Disability or inability to work</strong><span>SSI, SSDI, medical assistance, and related supports →</span></a>
+          <a href="meetings.html?q=opioid"><strong>Opioid recovery support</strong><span>Compare peer-support pathways and official meeting finders →</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="hub-section trust-section">
+      <div class="hub-container trust-grid">
+        <div><span class="hub-eyebrow">Use with confidence</span><h2>A practical navigation tool—not a guarantee of eligibility or availability.</h2></div>
+        <div class="trust-list"><p><strong>Verify before acting.</strong> Openings, schedules, funding, eligibility, insurance, fees, medication policies, and referral requirements can change.</p><p><strong>Use official links.</strong> The specialized directories prioritize official program, agency, fellowship, and service-body sources.</p><p><strong>Keep private details private.</strong> Saved trackers and checklists use browser storage on the device; the static site does not require an account.</p></div>
+      </div>
+    </section>
+  </main>
+  <footer class="hub-footer"><div class="hub-container footer-grid"><div><strong>MN Resource & Recovery Hub</strong><p>Housing • Treatment • Benefits • Recovery Meetings</p></div><div><a href="resources.html">Housing & Treatment</a><a href="benefits.html">Benefits</a><a href="meetings.html">Recovery Meetings</a></div><div><p>Resource data generated August 1, 2026. Benefits reviewed August 6, 2026. Meeting directory reviewed August 12, 2026.</p></div></div></footer>
+  <script src="portal-search-data.js"></script>
+  <script src="portal.js"></script>
+</body>
+</html>

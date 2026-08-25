@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A Minnesota-focused directory of recovery meetings for substance use, gambling, food, sex/love, technology, spending, relationships, family support, and more." />
+  <meta name="theme-color" content="#0f3d3e" />
+  <title>Recovery Meetings | MN Resource & Recovery Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Franklin:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="portal-nav.css" />
+  <link rel="stylesheet" href="meeting-styles.css" />
+</head>
+<body>
+<div class="portal-bar" role="navigation" aria-label="Minnesota Resource & Recovery Hub">
+  <div class="portal-bar-inner">
+    <a class="portal-home" href="index.html"><span class="portal-mark">MN</span><span><strong>Resource & Recovery Hub</strong><small>One Minnesota support website</small></span></a>
+    <nav class="portal-links" aria-label="Hub sections">
+      <a href="resources.html">Housing & Treatment</a>
+      <a href="benefits.html">Benefits</a>
+      <a href="meetings.html" aria-current="page">Recovery Meetings</a>
+    </nav>
+  </div>
+</div>
+
+  <a class="skip-link" href="#directory">Skip to directory</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Minnesota Recovery Meeting Finder home">
+        <span class="brand-mark" aria-hidden="true">MN</span>
+        <span><strong>Recovery Meeting Finder</strong><small>Minnesota</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="#directory">Find a meeting</a>
+        <a href="#pathways">Compare pathways</a>
+        <a href="#first-meeting">First meeting guide</a>
+        <a href="#sources">Sources</a>
+      </nav>
+      <button id="printBtn" class="btn btn-ghost header-action" type="button">Print / Save PDF</button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-bg hero-bg-one"></div>
+      <div class="hero-bg hero-bg-two"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Minnesota • all pathways • all addictions</p>
+          <h1>There is more than one way to find recovery.</h1>
+          <p class="hero-lead">Explore peer-support meetings for alcohol, drugs, opioids, meth, cocaine, cannabis, gambling, nicotine, food, sex/love, pornography, technology, gaming, spending, work, clutter, relationships, family support, and more.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#directory">Find my options</a>
+            <button id="surpriseBtn" class="btn btn-secondary" type="button">Show pathway-neutral peer support</button>
+          </div>
+          <div class="trust-row" aria-label="Directory features">
+            <span>✓ Minnesota-first</span>
+            <span>✓ Official finders prioritized</span>
+            <span>✓ Secular + spiritual + faith-based</span>
+            <span>✓ In-person + online</span>
+          </div>
+        </div>
+        <aside class="hero-panel" aria-label="Quick start">
+          <span class="panel-kicker">Quick match</span>
+          <h2>What are you looking for?</h2>
+          <div class="quick-grid" id="quickGrid">
+            <button data-quick="Alcohol">Alcohol</button>
+            <button data-quick="Any drug / polysubstance">Drugs</button>
+            <button data-quick="Opioids / heroin / fentanyl">Opioids</button>
+            <button data-quick="Gambling">Gambling</button>
+            <button data-quick="Food / compulsive eating">Food / eating</button>
+            <button data-quick="Sex / love / pornography">Sex / love / porn</button>
+            <button data-quick="Internet / technology / gaming">Tech / gaming</button>
+            <button data-audience-quick="Family / ally">Family support</button>
+          </div>
+          <p class="mini-note">Not sure? Choose <strong>All pathways / Peer recovery</strong> or browse everything.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="notice-strip" aria-label="Important note">
+      <div class="container notice-inner">
+        <div><strong>Important:</strong> Meeting schedules can change quickly. This site links to official fellowship and Minnesota service-body finders whenever possible. Verify details before traveling.</div>
+        <div class="reviewed">Directory reviewed <strong>August 12, 2026</strong></div>
+      </div>
+    </section>
+
+    <section class="section intro-section">
+      <div class="container">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">A recovery directory, not a one-size-fits-all answer</p>
+          <h2>Choose by addiction, philosophy, format, or who the meeting is for.</h2>
+          <p>You can filter traditional 12-Step fellowships, secular skills-based groups, Buddhist/mindfulness meetings, Christian recovery, Indigenous Wellbriety circles, medication-friendly recovery, all-pathways peer support, and family meetings.</p>
+        </div>
+        <div class="stats-grid" id="statsGrid"></div>
+      </div>
+    </section>
+
+    <section class="section directory-section" id="directory">
+      <div class="container">
+        <div class="section-heading split-heading">
+          <div>
+            <p class="eyebrow">Meeting directory</p>
+            <h2>Find recovery options</h2>
+            <p>Use one filter or combine several. Results update instantly.</p>
+          </div>
+          <div class="saved-summary" aria-live="polite">
+            <span id="resultCount">0 options</span>
+            <button id="savedOnlyBtn" class="text-button" type="button">♡ Saved <span id="savedCount">0</span></button>
+          </div>
+        </div>
+
+        <div class="finder-shell">
+          <div class="search-row">
+            <label class="search-box">
+              <span class="sr-only">Search directory</span>
+              <span aria-hidden="true">⌕</span>
+              <input id="searchInput" type="search" placeholder="Search: meth, women, secular, gambling, St. Paul, family..." autocomplete="off" />
+            </label>
+            <button id="clearFilters" class="btn btn-ghost" type="button">Clear filters</button>
+          </div>
+
+          <div class="filter-grid">
+            <label>
+              <span>Help with</span>
+              <select id="concernFilter"><option value="">All addictions / concerns</option></select>
+            </label>
+            <label>
+              <span>Recovery pathway</span>
+              <select id="pathwayFilter"><option value="">All approaches</option></select>
+            </label>
+            <label>
+              <span>Access</span>
+              <select id="accessFilter"><option value="">Any format</option></select>
+            </label>
+            <label>
+              <span>Who is it for?</span>
+              <select id="audienceFilter"><option value="">Anyone / all audiences</option></select>
+            </label>
+            <label>
+              <span>Minnesota region</span>
+              <select id="regionFilter"><option value="">Any region</option></select>
+            </label>
+          </div>
+
+          <div id="activeFilters" class="active-filters" aria-live="polite"></div>
+        </div>
+
+        <div class="directory-layout">
+          <div>
+            <div id="resourceGrid" class="resource-grid"></div>
+            <div id="emptyState" class="empty-state" hidden>
+              <div class="empty-icon">↺</div>
+              <h3>No exact match found</h3>
+              <p>Try fewer filters. If you are unsure which fellowship fits, start with SMART Recovery, Minnesota Recovery Connection All Recovery, NA, AA, or Recovery Dharma and compare the atmosphere.</p>
+              <button class="btn btn-primary" id="emptyClear" type="button">Show all options</button>
+            </div>
+          </div>
+
+          <aside class="sidebar-card">
+            <p class="eyebrow">Fast guidance</p>
+            <h3>How to pick your first meeting</h3>
+            <ol>
+              <li><strong>Start with identification.</strong> Choose a group where the problem sounds like yours.</li>
+              <li><strong>Choose a philosophy.</strong> Spiritual, secular, Buddhist, Christian, Indigenous, medication-friendly, or pathway-neutral.</li>
+              <li><strong>Check eligibility.</strong> Open, closed, gender-specific, teen, or family meetings can have different rules.</li>
+              <li><strong>Verify before going.</strong> Use the official finder button on the card.</li>
+              <li><strong>Try more than one.</strong> The fellowship may fit even when one particular meeting does not.</li>
+            </ol>
+            <div class="sidebar-callout">
+              <strong>Want broad support?</strong>
+              <p>Look for SMART Recovery, Minnesota Recovery Connection All Recovery, Recovery Dharma, Refuge Recovery, NA, or Celebrate Recovery depending on the philosophy you prefer.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section comparison-section" id="pathways">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Compare recovery styles</p>
+          <h2>Different meetings solve the “how” in different ways.</h2>
+          <p>None of these categories is automatically better for everyone. The best fit is the one a person can engage with consistently and safely.</p>
+        </div>
+        <div class="pathway-grid">
+          <article class="pathway-card">
+            <span class="pathway-icon">12</span><h3>12-Step / Spiritual</h3>
+            <p>Peer-led fellowships built around Steps, Traditions, sponsorship, shared experience, and a personally understood higher power.</p>
+            <p class="examples">Examples: AA, NA, CA, CMA, MA, GA, OA, CoDA.</p>
+          </article>
+          <article class="pathway-card">
+            <span class="pathway-icon">↗</span><h3>Secular / Skills-based</h3>
+            <p>Focuses on practical behavior-change tools, self-management, motivation, coping skills, and peer support without a required spiritual framework.</p>
+            <p class="examples">Examples: SMART Recovery, LifeRing, SMART Family & Friends.</p>
+          </article>
+          <article class="pathway-card">
+            <span class="pathway-icon">◌</span><h3>Buddhist / Mindfulness</h3>
+            <p>Uses meditation, mindfulness, ethical living, compassion, and investigation of craving and suffering as recovery practices.</p>
+            <p class="examples">Examples: Recovery Dharma, Refuge Recovery.</p>
+          </article>
+          <article class="pathway-card">
+            <span class="pathway-icon">✦</span><h3>Christian / Faith-based</h3>
+            <p>Integrates Christian beliefs, scripture, prayer, community, and recovery principles.</p>
+            <p class="examples">Example: Celebrate Recovery.</p>
+          </article>
+          <article class="pathway-card">
+            <span class="pathway-icon">◎</span><h3>Indigenous / Cultural</h3>
+            <p>Uses culturally grounded healing, circle process, community connection, spirituality, and Indigenous recovery teachings.</p>
+            <p class="examples">Example: Wellbriety / White Bison.</p>
+          </article>
+          <article class="pathway-card">
+            <span class="pathway-icon">∞</span><h3>All Pathways / Peer Recovery</h3>
+            <p>Welcomes multiple definitions and methods of recovery rather than requiring one fellowship or philosophy.</p>
+            <p class="examples">Example: Minnesota Recovery Connection All Recovery.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section first-section" id="first-meeting">
+      <div class="container two-column">
+        <div>
+          <div class="section-heading left-heading">
+            <p class="eyebrow">First meeting guide</p>
+            <h2>Common meeting words—plainly explained</h2>
+            <p>Fellowships use slightly different definitions, so the official meeting listing always wins. These are practical general explanations.</p>
+          </div>
+          <div id="termsList" class="accordion-list"></div>
+        </div>
+        <aside class="first-card">
+          <h3>What you usually do <em>not</em> have to do</h3>
+          <ul class="check-list">
+            <li>You usually do not have to tell your whole story.</li>
+            <li>You usually do not have to speak if you are not ready.</li>
+            <li>You do not need to already “have recovery figured out.”</li>
+            <li>Many peer meetings do not require registration or payment.</li>
+          </ul>
+          <h3>Before you leave</h3>
+          <ul class="check-list">
+            <li>Confirm day, time, address, and whether the meeting is in-person, online, or hybrid.</li>
+            <li>Check whether it is open or closed.</li>
+            <li>Check identity or age restrictions.</li>
+            <li>If virtual, look for passcodes or contact instructions on the official page.</li>
+          </ul>
+          <div class="safety-box">
+            <strong>Peer support is not emergency care.</strong>
+            <p>If someone is in immediate danger or experiencing a life-threatening medical emergency, call 911 or go to the nearest emergency department.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section source-section" id="sources">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">How this directory is maintained</p>
+          <h2>Official sources first. Static schedules last.</h2>
+          <p>Meeting information changes. This site is intentionally built around official meeting finders and Minnesota service bodies so users can confirm the current schedule themselves.</p>
+        </div>
+        <div id="sourceNotes" class="source-notes"></div>
+        <div class="source-actions">
+          <a class="btn btn-primary" href="#directory">Back to directory</a>
+          <button class="btn btn-secondary" id="exportBtn" type="button">Export visible list</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand footer-brand"><span class="brand-mark">MN</span><span><strong>Recovery Meeting Finder</strong><small>Minnesota</small></span></div>
+        <p>Built as a neutral recovery-navigation tool. No fellowship listed here is ranked as universally best.</p>
+      </div>
+      <div>
+        <strong>Use this site to</strong>
+        <a href="#directory">Search meeting pathways</a>
+        <a href="#pathways">Compare approaches</a>
+        <a href="#first-meeting">Prepare for a first meeting</a>
+      </div>
+      <div>
+        <strong>Data note</strong>
+        <p>Links were reviewed August 12, 2026. Always confirm a meeting before traveling.</p>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="detailDialog" class="detail-dialog">
+    <button class="dialog-close" id="dialogClose" type="button" aria-label="Close details">×</button>
+    <div id="dialogContent"></div>
+  </dialog>
+
+  <script src="meeting-data.js"></script>
+  <script src="meeting-app.js"></script>
+</body>
+</html>
