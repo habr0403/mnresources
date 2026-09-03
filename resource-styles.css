@@ -65,7 +65,11 @@ p { margin-top: 0; color: var(--muted); }
 .section-heading.centered { text-align: center; margin-inline: auto; }
 .inline-heading { max-width: none; display: flex; justify-content: space-between; align-items: end; gap: 40px; }
 .inline-heading > p { max-width: 430px; margin-bottom: 6px; }
-
+.portal-bar {
+  position: sticky;
+  top: 0;
+  z-index: 80;
+}
 .site-header {
   position: sticky; top: 0; z-index: 80; background: rgba(255,255,255,.94);
   backdrop-filter: blur(16px); border-bottom: 1px solid rgba(217,227,229,.9);
